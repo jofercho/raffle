@@ -1,5 +1,5 @@
-import 'package:chat_provider/views/widgets/form_box.dart';
-import 'package:chat_provider/views/widgets/input_field.dart';
+import 'package:raffle/views/widgets/form_box.dart';
+import 'package:raffle/views/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

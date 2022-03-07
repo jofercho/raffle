@@ -1,5 +1,5 @@
-import 'package:chat_provider/views/authentication/sign_in.dart';
-import 'package:chat_provider/views/background.dart';
+import 'package:raffle/views/authentication/sign_in.dart';
+import 'package:raffle/views/background.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

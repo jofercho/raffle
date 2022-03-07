@@ -1,4 +1,4 @@
-import 'package:chat_provider/model/app_model.dart';
+import 'package:raffle/model/app_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

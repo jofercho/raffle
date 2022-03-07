@@ -1,6 +1,6 @@
-import 'package:chat_provider/common/theme.dart';
-import 'package:chat_provider/model/user_model.dart';
-import 'package:chat_provider/views/authentication/authenticate.dart';
+import 'package:raffle/common/theme.dart';
+import 'package:raffle/model/user_model.dart';
+import 'package:raffle/views/authentication/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

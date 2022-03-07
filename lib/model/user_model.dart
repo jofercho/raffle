@@ -1,4 +1,4 @@
-import 'package:chat_provider/model/contact_model.dart';
+import 'package:raffle/model/contact_model.dart';
 
 class UserModel extends ContactModel{
   late String userId;
