@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
-  String hintText;
-  double? fontsize;
+  final String hintText;
+  final double? fontsize;
 
-  InputField({
+  const InputField({
     Key? key, this.hintText = 'Input', this.fontsize
   }) : super(key: key);
 
