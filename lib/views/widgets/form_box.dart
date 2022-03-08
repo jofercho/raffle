@@ -4,10 +4,10 @@ import 'package:raffle/views/widgets/input_field.dart';
 import 'package:flutter/material.dart';
 
 class FormBox extends StatefulWidget {
-  final bool isSignUp;
+  final bool isSignIn;
 
   const FormBox({
-    Key? key, required this.isSignUp
+    Key? key, required this.isSignIn
   }) : super(key: key);
 
   @override
@@ -30,7 +30,7 @@ class _FormBoxState extends State<FormBox> {
             decoration: inputBoxDecoration,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:  [
+              children: const [
                 InputField(
                   hintText: 'User Email',
                   fontsize: 20,
@@ -39,12 +39,6 @@ class _FormBoxState extends State<FormBox> {
                   hintText: '********',
                   fontsize: 22,
                 ),
-                if(widget.isSignUp){
-                 return InputField(
-                  hintText: '********',
-                  fontsize: 22,
-                )
-                }
               ],
             ),
           ),

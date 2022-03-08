@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main(List<String> args) {
-  runApp(MyChat());
+  runApp(const MyChat());
 }
 
 class MyChat extends StatefulWidget {
-  MyChat({Key? key}) : super(key: key);
+  const MyChat({Key? key}) : super(key: key);
 
   @override
   State<MyChat> createState() => _MyChatState();

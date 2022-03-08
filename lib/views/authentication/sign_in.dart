@@ -11,7 +11,7 @@ class SignIn extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Title(title: "Login"),
-        const FormBox(isSignUp: false),
+        const FormBox(isSignIn: false),
         CustomLoginLink(register: false),
         CustomLoginLink(register: true),
       ],
