@@ -1,5 +1,6 @@
 import 'package:raffle/common/theme.dart';
 import 'package:raffle/model/user_model.dart';
+import 'package:raffle/model/validation/auth_validation.dart';
 import 'package:raffle/views/authentication/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,8 +22,9 @@ class _MyChatState extends State<MyChat> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<UserModel>(
-          create: (context) => UserModel.empty()
-        )
+            create: (context) => UserModel.empty()),
+        ChangeNotifierProvider<AuthenticationValidation>(
+            create: (context) => AuthenticationValidation())
       ],
       child: MaterialApp(
         title: 'MyChat',
@@ -30,7 +32,7 @@ class _MyChatState extends State<MyChat> {
         // home: Authenticate(),
         initialRoute: '/',
         routes: {
-          '/' :(context) => const Authenticate(),
+          '/': (context) => const Authenticate(),
         },
       ),
     );

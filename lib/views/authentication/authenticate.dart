@@ -1,4 +1,5 @@
 import 'package:raffle/views/authentication/sign_in.dart';
+import 'package:raffle/views/authentication/sign_up.dart';
 import 'package:raffle/views/background.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,13 +19,7 @@ class Authenticate extends StatelessWidget {
           Background(),
           !user.isAuthenticated
               ? SignIn()
-              : Container(
-                  child: ElevatedButton(
-                  onPressed: () {
-                    user.setAuthenticaded = false;
-                  },
-                  child: Text('Change'),
-                ))
+              : SignUp()
         ],
       ),
     );

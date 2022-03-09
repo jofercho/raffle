@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
-class CustomLoginLink extends StatefulWidget {
+class CustomAuthLink extends StatefulWidget {
   final bool register;
+  final void Function() linkFunction;
 
-  CustomLoginLink({Key? key, this.register = true}) : super(key: key) {}
+  CustomAuthLink({Key? key, this.register = true, required this.linkFunction}) : super(key: key) {}
 
   @override
-  State<CustomLoginLink> createState() => _CustomLoginLinkState();
+  State<CustomAuthLink> createState() => _CustomAuthLinkState();
 }
 
-class _CustomLoginLinkState extends State<CustomLoginLink> {
+class _CustomAuthLinkState extends State<CustomAuthLink> {
   late MainAxisAlignment mainAxisAlignment;
   late String title;
   late Color color;
@@ -33,14 +34,17 @@ class _CustomLoginLinkState extends State<CustomLoginLink> {
     return Row(
       mainAxisAlignment: mainAxisAlignment,
       children: [
-        Container(
-          margin: const EdgeInsets.only(right: 16, top: 16),
-          child: Text(
-            title,
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              color: color,
+        GestureDetector(
+          onTap: widget.linkFunction,
+          child: Container(
+            margin: const EdgeInsets.only(right: 16, top: 16),
+            child: Text(
+              title,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: color,
+              ),
             ),
           ),
         ),

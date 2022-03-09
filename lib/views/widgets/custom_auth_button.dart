@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:raffle/model/validation/auth_validation.dart';
 
-class CustomLoginButton extends StatelessWidget {
-  const CustomLoginButton({
-    Key? key,
+class CustomAuthButton extends StatelessWidget {
+  final bool submitValidation;
+  const CustomAuthButton({
+    Key? key, required this.submitValidation
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var counter = 1;
     return GestureDetector(
       onTap: (() {
-        print('esta vivo ${counter++}');
+        AuthenticationValidation authentication =
+            context.read<AuthenticationValidation>();
+        if (submitValidation) { 
+          authentication.submitData();
+        }
       }),
       child: Container(
         margin: const EdgeInsets.only(right: 15),
