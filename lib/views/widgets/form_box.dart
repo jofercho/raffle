@@ -17,12 +17,12 @@ class FormBox extends StatefulWidget {
 class _FormBoxState extends State<FormBox> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 150,
+    return Container(
+      // height: 250,
       child: Stack(
         children: [
           Container(
-            height: 150,
+            height: widget.inputElements.length * 80,
             margin: const EdgeInsets.only(
               right: 70,
             ),
@@ -32,8 +32,10 @@ class _FormBoxState extends State<FormBox> {
               children: widget.inputElements,
             ),
           ),
-          Align(
-            alignment: Alignment.centerRight,
+          Positioned(
+            // alignment: Alignment.centerRight,
+            right: 0,
+            bottom: 10,
             child: widget.customAuthButton,
           ),
         ],

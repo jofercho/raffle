@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:raffle/model/validation/auth_validation.dart';
+import 'package:raffle/util/navigation.dart';
 import 'package:raffle/views/authentication/auth_title.dart';
 import 'package:raffle/views/widgets/custom_auth_button.dart';
 import 'package:raffle/views/widgets/custom_auth_link.dart';
@@ -14,35 +15,52 @@ class SignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthenticationValidation authValidation =
         Provider.of<AuthenticationValidation>(context);
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const AuthenticationTitle(title: "Login"),
-        FormBox(
-          inputElements: [
-            InputField(
-              hintText: 'User Email',
-              fontsize: 20,
-              errorText: authValidation.email.error ?? '',
-              onChange: (String value) {
-                authValidation.changeEmail(value);
-              },
-            ),
-            InputField(
-              hintText: '********',
-              fontsize: 22,
-              errorText: authValidation.password.error ?? '',
-              onChange: (String value) {
-                authValidation.changePassword(value);
-              },
-            ),
-          ],
-          customAuthButton:
-              CustomAuthButton(submitValidation: authValidation.isValidSignIn),
-        ),
-        CustomAuthLink(register: false),
-        CustomAuthLink(register: true),
-      ],
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const AuthenticationTitle(title: "Login"),
+          FormBox(
+            inputElements: [
+              InputField(
+                hintText: 'User Email',
+                fontsize: 20,
+                errorText: authValidation.email.error ?? '',
+                onChange: (String value) {
+                  authValidation.changeEmail(value);
+                },
+              ),
+              InputField(
+                hintText: '********',
+                fontsize: 22,
+                errorText: authValidation.password.error ?? '',
+                onChange: (String value) {
+                  authValidation.changePassword(value);
+                },
+              ),
+            ],
+            customAuthButton:
+                CustomAuthButton(submitValidation: authValidation.isValidSignIn),
+          ),
+          // const SizedBox(height: 40,),
+          const CustomAuthLink(
+              text: 'Forgot ?',
+              aligment: MainAxisAlignment.end,
+              linkFunction: onForgot),
+          CustomAuthLink(
+            text: 'Register',
+            aligment: MainAxisAlignment.start,
+            linkFunction: () => authValidation.isSigningIn = false,
+            color: const Color(0xffe98f60),
+          ),
+          // const CustomAuthLink(text: 'Register', aligment: MainAxisAlignment.start, linkFunction: onRegister, color: Color(0xffe98f60),),
+        ],
+      ),
     );
   }
 }
+
+onForgot() {
+  print('ay me olvide');
+}
+

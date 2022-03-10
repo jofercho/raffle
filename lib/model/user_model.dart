@@ -12,7 +12,7 @@ class UserModel extends ContactModel{
 
   bool get isAuthenticated => _isAuthenticated;
 
-  set setAuthenticaded(bool isAuthenticated){
+  set isAuthenticaded(bool isAuthenticated){
     _isAuthenticated = isAuthenticated;
     notifyListeners();
   }

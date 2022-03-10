@@ -1,9 +1,12 @@
 import 'package:raffle/common/theme.dart';
 import 'package:raffle/model/user_model.dart';
 import 'package:raffle/model/validation/auth_validation.dart';
+import 'package:raffle/util/navigation.dart';
 import 'package:raffle/views/authentication/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:raffle/views/authentication/sign_in.dart';
+import 'package:raffle/views/authentication/sign_up.dart';
 
 void main(List<String> args) {
   runApp(const MyChat());
@@ -30,9 +33,11 @@ class _MyChatState extends State<MyChat> {
         title: 'MyChat',
         theme: appTheme,
         // home: Authenticate(),
-        initialRoute: '/',
+        initialRoute: Navigation.authenticate,
         routes: {
-          '/': (context) => const Authenticate(),
+          Navigation.authenticate: (context) => const Authenticate(),
+          Navigation.signIn: (context) => const SignIn(),
+          Navigation.signUp:(context) => const SignUp()
         },
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:raffle/model/validation/auth_validation.dart';
 import 'package:raffle/views/authentication/sign_in.dart';
 import 'package:raffle/views/authentication/sign_up.dart';
 import 'package:raffle/views/background.dart';
@@ -12,12 +13,14 @@ class Authenticate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserModel user = context.watch<UserModel>();
-    print("user.isAuthenticated: " + user.isAuthenticated.toString());
+    AuthenticationValidation auth = context.watch<AuthenticationValidation>();
+    // print("user.isAuthenticated: " + user.isAuthenticated.toString());
     return Scaffold(
       body: Stack(
         children: [
           Background(),
-          !user.isAuthenticated
+          // !user.isAuthenticated
+          auth.isSigningIn
               ? SignIn()
               : SignUp()
         ],
