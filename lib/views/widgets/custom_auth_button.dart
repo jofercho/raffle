@@ -4,18 +4,17 @@ import 'package:raffle/model/validation/auth_validation.dart';
 
 class CustomAuthButton extends StatelessWidget {
   final bool submitValidation;
-  const CustomAuthButton({
-    Key? key, required this.submitValidation
-  }) : super(key: key);
+  const CustomAuthButton({Key? key, required this.submitValidation})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    AuthenticationValidation authentication =
+        context.read<AuthenticationValidation>();
     return GestureDetector(
       onTap: (() {
-        AuthenticationValidation authentication =
-            context.read<AuthenticationValidation>();
-        if (submitValidation) { 
-          authentication.submitData();
+        if (submitValidation) {
+          authentication.submitData(context);
         }
       }),
       child: Container(

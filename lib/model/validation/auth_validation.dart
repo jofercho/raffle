@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+import 'package:raffle/model/user_model.dart';
 import 'package:raffle/model/validation/validation_item.dart';
 import 'package:raffle/util/extension_methods.dart';
 
@@ -16,10 +18,10 @@ class AuthenticationValidation extends ChangeNotifier {
   bool get isValidSignUp =>
       _email.value != null &&
       _password.value != null &&
-      _passwordConfirmation.value!= null;
+      _passwordConfirmation.value != null;
   bool get isSigningIn => _isSigningIn;
 
-  set isSigningIn(bool isSigningIn){
+  set isSigningIn(bool isSigningIn) {
     print("changing isSinging in to $isValidSignIn");
     _isSigningIn = isSigningIn;
     notifyListeners();
@@ -46,7 +48,9 @@ class AuthenticationValidation extends ChangeNotifier {
     notifyListeners();
   }
 
-  void submitData() {
+  void submitData(BuildContext context) {
     print("email: ${email.value} , password ${password.value}");
+    UserModel user = context.read<UserModel>();
+    user.isAuthenticaded = true;
   }
 }

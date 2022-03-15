@@ -48,8 +48,8 @@ class Curved extends CustomPainter {
       end: Alignment.centerRight,
       stops: [.05, 1],
       colors: [
-        Color(0xff0ce8f9),
-        Color(0xff45b7fe),
+        Color(0xfff1665f),
+        Color(0xfff8a55f),
       ],
     ).createShader(rect);
 

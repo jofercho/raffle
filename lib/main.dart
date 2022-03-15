@@ -1,4 +1,5 @@
 import 'package:raffle/common/theme.dart';
+import 'package:raffle/model/raflle_tabs_providers/raffle_tabs.dart';
 import 'package:raffle/model/user_model.dart';
 import 'package:raffle/model/validation/auth_validation.dart';
 import 'package:raffle/util/navigation.dart';
@@ -27,7 +28,9 @@ class _MyChatState extends State<MyChat> {
         ChangeNotifierProvider<UserModel>(
             create: (context) => UserModel.empty()),
         ChangeNotifierProvider<AuthenticationValidation>(
-            create: (context) => AuthenticationValidation())
+            create: (context) => AuthenticationValidation()),
+        ChangeNotifierProvider<RaffleTabsNavigation>(
+            create: (context) => RaffleTabsNavigation())
       ],
       child: MaterialApp(
         title: 'MyChat',
@@ -37,7 +40,7 @@ class _MyChatState extends State<MyChat> {
         routes: {
           Navigation.authenticate: (context) => const Authenticate(),
           Navigation.signIn: (context) => const SignIn(),
-          Navigation.signUp:(context) => const SignUp()
+          Navigation.signUp: (context) => const SignUp()
         },
       ),
     );

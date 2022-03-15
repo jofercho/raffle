@@ -4,6 +4,8 @@ import 'package:raffle/views/authentication/sign_up.dart';
 import 'package:raffle/views/background.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:raffle/views/raffle.dart';
+import 'package:raffle/views/raffle_list/raffle_list.dart';
 
 import '../../model/user_model.dart';
 
@@ -18,11 +20,12 @@ class Authenticate extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Background(),
-          // !user.isAuthenticated
-          auth.isSigningIn
-              ? SignIn()
-              : SignUp()
+          if (user.isAuthenticated) ...[
+            Container(child: Raffle(),)
+          ] else ...[
+            Background(),
+            auth.isSigningIn ? SignIn() : SignUp()
+          ]
         ],
       ),
     );
