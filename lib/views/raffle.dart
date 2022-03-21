@@ -20,17 +20,17 @@ class Raffle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double currentTab = context.watch<RaffleTabsNavigation>().currentTab;
+    RaffleTabsNavigation raffleTabsNavigation =
+        context.watch<RaffleTabsNavigation>();
     return Scaffold(
       // appBar: AppBar(title: Text('Test')),
       body: PageView(
         controller: pageController,
         onPageChanged: (index) {
-          print(index);
-          // currentTab = index as double;
+          raffleTabsNavigation.currentTab = index.toDouble();
         },
         children: [
-          RaffleList(),
+          const RaffleList(),
           Container(
             color: Colors.yellow,
           ),
@@ -39,44 +39,51 @@ class Raffle extends StatelessWidget {
           ),
         ],
       ),
-      // body: PageView.builder(
-      //   itemBuilder: (context, index) {
-      //     print('current page '+currentTab.toString());
-      //     if (index == currentTab.floor()) {
-      //       return Transform(
-      //         transform: Matrix4.identity()..rotateX(currentTab - index),
-      //         child: Container(
-      //           color: index % 2 == 0 ? Colors.blue : Colors.pink,
-      //           child: Center(
-      //             child: Text(
-      //               'Page $currentTab',
-      //               style: TextStyle(color: Colors.white, fontSize: 22.0),
-      //             ),
-      //           ),
-      //         ),
-      //       );
-      //     }else if(index == currentTab.floor() + 1){
-      //       return Transform(transform: Matrix4.identity()..rotateX(currentTab - index), 
-      //       child: Container(
-      //         color: index % 2 == 0? Colors.blue : Colors.pink,
-      //         child: Center(child: Text('Page $currentTab', style: TextStyle(color: Colors.white, fontSize: 22.0),)),
-      //       ),);
-      //     } else{
-      //       return Container(
-      //         color: index % 2 == 0? Colors.blue : Colors.pink,
-      //         child: Center(child: Text('Page $currentTab', style: TextStyle(color: Colors.white, fontSize: 22.0),)),
-      //       );
-      //     }
-      //   },
-      // ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: builBottomBarItems(),
-        onTap: (index) {
-          currentTab = index.toDouble();
-          pageController.animateToPage(index, curve: Curves.decelerate, duration: Duration(seconds: 1));
-          print('tap index: '+index.toString());
-        },
-      ),
+      bottomNavigationBar:
+          RaffleBottomNavigationBar(pageController: pageController),
+    );
+  }
+}
+
+class RaffleBottomNavigationBar extends StatelessWidget {
+  const RaffleBottomNavigationBar({
+    Key? key,
+    required this.pageController,
+  }) : super(key: key);
+
+  final PageController pageController;
+
+  @override
+  Widget build(BuildContext context) {
+    RaffleTabsNavigation raffleTabsNavigation =
+        Provider.of<RaffleTabsNavigation>(context);
+    return BottomNavigationBar(
+      items: const [
+        BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
+            label: 'Home'),
+        BottomNavigationBarItem(
+            icon: Icon(
+              Icons.search,
+            ),
+            label: 'Search'),
+        BottomNavigationBarItem(
+            icon: Icon(
+              Icons.info_outline,
+            ),
+            label: 'Info'),
+      ],
+      unselectedLabelStyle: TextStyle(color: Colors.grey[400]),
+      currentIndex: raffleTabsNavigation.currentTab.floor(),
+      onTap: (index) {
+        raffleTabsNavigation.currentTab = index.toDouble();
+        pageController.animateToPage(index,
+            curve: Curves.decelerate,
+            duration: const Duration(milliseconds: 200));
+        print('tap index: ' + index.toString());
+      },
     );
   }
 }

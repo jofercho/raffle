@@ -2,7 +2,7 @@ import 'package:raffle/model/contact_model.dart';
 
 class UserModel extends ContactModel{
   late String userId;
-  bool _isAuthenticated = false;
+  bool _isAuthenticated = true;
 
   UserModel.empty(){
     userId = '';
