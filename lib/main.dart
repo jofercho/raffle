@@ -2,6 +2,7 @@ import 'package:raffle/common/theme.dart';
 import 'package:raffle/model/raflle_tabs_providers/raffle_tabs.dart';
 import 'package:raffle/model/user_model.dart';
 import 'package:raffle/model/validation/auth_validation.dart';
+import 'package:raffle/util/firebase_utils.dart';
 import 'package:raffle/util/navigation.dart';
 import 'package:raffle/views/authentication/authenticate.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,9 @@ import 'package:raffle/views/authentication/sign_in.dart';
 import 'package:raffle/views/authentication/sign_up.dart';
 
 void main(List<String> args) {
+  WidgetsFlutterBinding.ensureInitialized();
+  FirebaseUtils firebaseUtils = FirebaseUtils();
+  firebaseUtils.initialize();
   runApp(const MyChat());
 }
 

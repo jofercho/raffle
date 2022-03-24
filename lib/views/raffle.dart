@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:raffle/model/raflle_tabs_providers/raffle_tabs.dart';
@@ -23,7 +24,18 @@ class Raffle extends StatelessWidget {
     RaffleTabsNavigation raffleTabsNavigation =
         context.watch<RaffleTabsNavigation>();
     return Scaffold(
-      // appBar: AppBar(title: Text('Test')),
+      appBar: AppBar(title: Text('Test'),
+      actions: [
+ IconButton(
+            icon: const Icon(Icons.add_alert),
+            tooltip: 'Show Snackbar',
+            onPressed: () async{
+              FirebaseAuth instance = FirebaseAuth.instance;
+              UserCredential credential = await instance.signInAnonymously();
+              debugPrint('lo q trajo ${credential.user?.uid}');
+            },
+          ),
+      ]),
       body: PageView(
         controller: pageController,
         onPageChanged: (index) {
