@@ -1,6 +1,6 @@
 import 'package:raffle/common/theme.dart';
 import 'package:raffle/model/raflle_tabs_providers/raffle_tabs.dart';
-import 'package:raffle/model/user_model.dart';
+import 'package:raffle/model/admin_model.dart';
 import 'package:raffle/model/validation/auth_validation.dart';
 import 'package:raffle/util/firebase_utils.dart';
 import 'package:raffle/util/navigation.dart';
@@ -10,10 +10,10 @@ import 'package:provider/provider.dart';
 import 'package:raffle/views/authentication/sign_in.dart';
 import 'package:raffle/views/authentication/sign_up.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseUtils firebaseUtils = FirebaseUtils();
-  firebaseUtils.initialize();
+  await firebaseUtils.initialize();
   runApp(const MyChat());
 }
 
@@ -25,14 +25,33 @@ class MyChat extends StatefulWidget {
 }
 
 class _MyChatState extends State<MyChat> {
+  var auth = AuthenticationValidation();
+  var admin = AdminModel();
+
+  @override
+  void initState() {
+    super.initState();
+    // fakeStart();
+  }
+
+  fakeStart(){
+print(' este es el initstate de main');
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+      print('despues del build');
+      auth.test();
+      setState(() {
+        admin.isAuthenticaded = true;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<UserModel>(
-            create: (context) => UserModel.empty()),
+        ChangeNotifierProvider<AdminModel>(create: (context) => admin),
         ChangeNotifierProvider<AuthenticationValidation>(
-            create: (context) => AuthenticationValidation()),
+            create: (context) => auth),
         ChangeNotifierProvider<RaffleTabsNavigation>(
             create: (context) => RaffleTabsNavigation())
       ],

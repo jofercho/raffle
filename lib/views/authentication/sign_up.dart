@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:raffle/model/user_model.dart';
+import 'package:raffle/model/admin_model.dart';
 import 'package:raffle/model/validation/auth_validation.dart';
 import 'package:raffle/util/navigation.dart';
 import 'package:raffle/views/authentication/auth_title.dart';

@@ -24,22 +24,14 @@ class Raffle extends StatelessWidget {
     RaffleTabsNavigation raffleTabsNavigation =
         context.watch<RaffleTabsNavigation>();
     return Scaffold(
-      appBar: AppBar(title: Text('Test'),
-      actions: [
- IconButton(
-            icon: const Icon(Icons.add_alert),
-            tooltip: 'Show Snackbar',
-            onPressed: () async{
-              FirebaseAuth instance = FirebaseAuth.instance;
-              UserCredential credential = await instance.signInAnonymously();
-              debugPrint('lo q trajo ${credential.user?.uid}');
-            },
-          ),
-      ]),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: () {},
+      ),
       body: PageView(
         controller: pageController,
         onPageChanged: (index) {
-          raffleTabsNavigation.currentTab = index.toDouble();
+          raffleTabsNavigation.currentTab = index;
         },
         children: [
           const RaffleList(),
@@ -51,8 +43,14 @@ class Raffle extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar:
-          RaffleBottomNavigationBar(pageController: pageController),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        color: Colors.red,
+        notchMargin: 7,
+        child: RaffleBottomNavigationBar(pageController: pageController),
+      ),
+      // ,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }
@@ -65,37 +63,93 @@ class RaffleBottomNavigationBar extends StatelessWidget {
 
   final PageController pageController;
 
+  _onIconButtonPress(int index, BuildContext context) {
+        RaffleTabsNavigation raffleTabsNavigation = context.read<RaffleTabsNavigation>();
+    print('ay me apretó $index');
+    raffleTabsNavigation.currentTab = index;
+    pageController.animateToPage(index,
+        curve: Curves.decelerate, duration: const Duration(milliseconds: 200));
+    print('tap index: ' + index.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
-    RaffleTabsNavigation raffleTabsNavigation =
-        Provider.of<RaffleTabsNavigation>(context);
-    return BottomNavigationBar(
-      items: const [
-        BottomNavigationBarItem(
-            icon: Icon(
+    RaffleTabsNavigation raffleTabsNavigation = context.read<RaffleTabsNavigation>();
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        IconButton(
+            onPressed: () => _onIconButtonPress(0, context),
+            color: raffleTabsNavigation.getTabColor(0),
+            icon: const Icon(
               Icons.home,
-            ),
-            label: 'Home'),
-        BottomNavigationBarItem(
-            icon: Icon(
+            )),
+        IconButton(
+            onPressed: () => _onIconButtonPress(1, context),
+            color: raffleTabsNavigation.getTabColor(1),
+            icon: const Icon(
               Icons.search,
-            ),
-            label: 'Search'),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.info_outline,
-            ),
-            label: 'Info'),
+            )),
+        IconButton(
+            onPressed: () => _onIconButtonPress(2, context),
+            color: raffleTabsNavigation.getTabColor(2),
+            icon: const Icon(
+              Icons.info,
+            )),
+        IconButton(
+            onPressed: () => _onIconButtonPress(3, context),
+            color: raffleTabsNavigation.getTabColor(3),
+            icon: const Icon(
+              Icons.info,
+            )),
+        Padding(padding: EdgeInsets.symmetric(horizontal: 30.0))
       ],
-      unselectedLabelStyle: TextStyle(color: Colors.grey[400]),
-      currentIndex: raffleTabsNavigation.currentTab.floor(),
-      onTap: (index) {
-        raffleTabsNavigation.currentTab = index.toDouble();
-        pageController.animateToPage(index,
-            curve: Curves.decelerate,
-            duration: const Duration(milliseconds: 200));
-        print('tap index: ' + index.toString());
-      },
     );
   }
 }
+
+
+
+// class RaffleBottomNavigationBar extends StatelessWidget {
+//   const RaffleBottomNavigationBar({
+//     Key? key,
+//     required this.pageController,
+//   }) : super(key: key);
+
+//   final PageController pageController;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     RaffleTabsNavigation raffleTabsNavigation =
+//         Provider.of<RaffleTabsNavigation>(context);
+//     return BottomNavigationBar(
+//       items: const [
+//         BottomNavigationBarItem(
+//             icon: Icon(
+//               Icons.home,
+//             ),
+//             label: 'Home'),
+//         BottomNavigationBarItem(
+//             icon: Icon(
+//               Icons.search,
+//             ),
+//             label: 'Search'),
+//         BottomNavigationBarItem(
+//             icon: Icon(
+//               Icons.info_outline,
+//             ),
+//             label: 'Info'),
+//       ],
+//       unselectedLabelStyle: TextStyle(color: Colors.grey[400]),
+//       currentIndex: raffleTabsNavigation.currentTab.floor(),
+//       onTap: (index) {
+//         raffleTabsNavigation.currentTab = index.toDouble();
+//         pageController.animateToPage(index,
+//             curve: Curves.decelerate,
+//             duration: const Duration(milliseconds: 200));
+//         print('tap index: ' + index.toString());
+//       },
+//     );
+//   }
+// }

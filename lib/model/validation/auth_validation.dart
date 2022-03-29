@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:raffle/model/user_model.dart';
+import 'package:raffle/model/admin_model.dart';
 import 'package:raffle/model/validation/validation_item.dart';
+import 'package:raffle/services/auth_service.dart';
 import 'package:raffle/util/extension_methods.dart';
 
 class AuthenticationValidation extends ChangeNotifier {
+  final AuthService _authService = AuthService();
+
   bool _isSigningIn = true;
 
   ValidationItem _email = ValidationItem();
@@ -48,9 +52,20 @@ class AuthenticationValidation extends ChangeNotifier {
     notifyListeners();
   }
 
-  void submitData(BuildContext context) {
-    print("email: ${email.value} , password ${password.value}");
-    UserModel user = context.read<UserModel>();
+  void submitData(BuildContext context) async {
+    if (_isSigningIn) {
+      await _authService.signIn(email.value!, password.value!);
+    } else {
+      await _authService.signUp(email.value!, password.value!);
+    }
+
+    print(
+        "singin: $isSigningIn email: ${email.value} , password ${password.value}");
+    AdminModel user = context.read<AdminModel>();
     user.isAuthenticaded = true;
+  }
+
+  void test() async {
+    _authService.test();
   }
 }
