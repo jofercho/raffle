@@ -13,21 +13,17 @@ class FirebaseUtils {
   FirebaseUtils._internal();
 
   initialize() async {
-    print('inicio firebaseutils');
     await Firebase.initializeApp();
     if (const bool.fromEnvironment("USE_FIREBASE_EMULATORS")) {
       await _configureFirebaseAuth();
       _configureFireStore();
     }
-    print('fin firebaseutils');
   }
 
   _configureFirebaseAuth() async {
-    print('inicio configure localhost');
     String host = "localhost";
     int port = 9099;
     await FirebaseAuth.instance.useAuthEmulator(host, port);
-    print('fin configure localhost');
   }
 
   _configureFireStore() {
