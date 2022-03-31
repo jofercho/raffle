@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class RaffleTabsNavigation extends ChangeNotifier {
+class RaffleTabsNavigationModel extends ChangeNotifier {
   int _currentTab = 0;
   List<TabIcon> tabIcons = [
     TabIcon(),

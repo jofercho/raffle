@@ -1,32 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:raffle/model/raflle_tabs_providers/raffle_tabs.dart';
+import 'package:raffle/model/raflle_tabs_providers/raffle_tabs_model.dart';
+import 'package:raffle/util/navigation.dart';
 import 'package:raffle/views/raffle_list/raffle_list.dart';
 
 class Raffle extends StatelessWidget {
-  List<BottomNavigationBarItem> builBottomBarItems() {
-    return [
-      const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-      const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-      const BottomNavigationBarItem(
-          icon: Icon(Icons.info_outline), label: 'Info'),
-    ];
-  }
-
   PageController pageController =
       PageController(initialPage: 0, keepPage: true);
 
-  // const Home({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    RaffleTabsNavigation raffleTabsNavigation =
-        context.watch<RaffleTabsNavigation>();
+    RaffleTabsNavigationModel raffleTabsNavigation =
+        context.watch<RaffleTabsNavigationModel>();
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {},
+        child: const Icon(Icons.add),
+        onPressed: () { 
+          print('agregar contenido');
+          Navigator.pushNamed(context, Navigation.addRaffle);
+        },
       ),
       body: PageView(
         controller: pageController,
@@ -63,18 +56,10 @@ class RaffleBottomNavigationBar extends StatelessWidget {
 
   final PageController pageController;
 
-  _onIconButtonPress(int index, BuildContext context) {
-        RaffleTabsNavigation raffleTabsNavigation = context.read<RaffleTabsNavigation>();
-    print('ay me apretó $index');
-    raffleTabsNavigation.currentTab = index;
-    pageController.animateToPage(index,
-        curve: Curves.decelerate, duration: const Duration(milliseconds: 200));
-    print('tap index: ' + index.toString());
-  }
-
   @override
   Widget build(BuildContext context) {
-    RaffleTabsNavigation raffleTabsNavigation = context.read<RaffleTabsNavigation>();
+    RaffleTabsNavigationModel raffleTabsNavigation =
+        context.read<RaffleTabsNavigationModel>();
     return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -103,9 +88,27 @@ class RaffleBottomNavigationBar extends StatelessWidget {
             icon: const Icon(
               Icons.info,
             )),
-        Padding(padding: EdgeInsets.symmetric(horizontal: 30.0))
+        const Padding(padding: EdgeInsets.symmetric(horizontal: 30.0))
       ],
     );
+  }
+
+  _onIconButtonPress(int index, BuildContext context) {
+    RaffleTabsNavigationModel raffleTabsNavigation =
+        context.read<RaffleTabsNavigationModel>();
+    raffleTabsNavigation.currentTab = index;
+    pageController.animateToPage(index,
+        curve: Curves.decelerate, duration: const Duration(milliseconds: 200));
+    print('tap index: ' + index.toString());
+  }
+
+  List<BottomNavigationBarItem> builBottomBarItems() {
+    return [
+      const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+      const BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+      const BottomNavigationBarItem(
+          icon: Icon(Icons.info_outline), label: 'Info'),
+    ];
   }
 }
 

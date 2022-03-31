@@ -15,15 +15,14 @@ class Authenticate extends StatelessWidget {
   Widget build(BuildContext context) {
     AdminModel user = context.watch<AdminModel>();
     AuthenticationValidation auth = context.watch<AuthenticationValidation>();
-    // print("user.isAuthenticated: " + user.isAuthenticated.toString());
     return Scaffold(
       body: Stack(
         children: [
           if (user.isAuthenticated) ...[
-            Container(child: Raffle(),)
+            Raffle()
           ] else ...[
             Background(),
-            auth.isSigningIn ? SignIn() : SignUp()
+            auth.isSigningIn ? const SignIn() : const SignUp()
           ]
         ],
       ),

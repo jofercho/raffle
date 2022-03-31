@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 
 class RaffleModel extends ChangeNotifier {
   final String title;
-  final String miniDescription;
   final String description;
   // final picture TODO: get picture from firebase storage
   final double price;
@@ -17,7 +16,6 @@ class RaffleModel extends ChangeNotifier {
 
   RaffleModel(
       {required this.title,
-      required this.miniDescription,
       required this.description,
       required this.price,
       required this.tickets,
@@ -27,7 +25,6 @@ class RaffleModel extends ChangeNotifier {
   RaffleModel.fromJson(Map<String, Object?> json)
       : this(
           title: json['title']! as String,
-          miniDescription: json['miniDescription']! as String,
           description: json['description']! as String,
           price: json['price']! as double,
           tickets: json['tickets']! as int,
@@ -38,7 +35,6 @@ class RaffleModel extends ChangeNotifier {
   Map<String, Object?> toJson() {
     return {
       'title': title,
-      'miniDescription': miniDescription,
       'description': description,
       'price': price,
       'tickets': tickets,
