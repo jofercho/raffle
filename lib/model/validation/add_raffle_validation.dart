@@ -6,7 +6,7 @@ class AddRaffleValidation extends ChangeNotifier {
   ValidationItem _title = ValidationItem<String>();
   ValidationItem _description = ValidationItem<String>();
   ValidationItem _price = ValidationItem<double>();
-  ValidationItem _tickets = ValidationItem<int>();
+  ValidationItem _tickets = ValidationItem<int>(value: 0);
   ValidationItem _date = ValidationItem<DateTime>();
 
   get title => _title;
@@ -25,12 +25,13 @@ class AddRaffleValidation extends ChangeNotifier {
     _description = ValidationItem(value:value, error: null);
   }
 
-  changePrice(int value) {
+  changePrice(double value) {
     _price = ValidationItem(value:value, error: null);
   }
 
-  changeTickets(String value) {
+  changeTickets(int value) {
     _tickets = ValidationItem(value:value, error: null);
+    notifyListeners();
   }
 
 

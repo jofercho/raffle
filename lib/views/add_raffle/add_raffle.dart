@@ -3,7 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:raffle/model/add_raffle/add_raffle_model.dart';
 import 'package:raffle/model/validation/add_raffle_validation.dart';
 import 'package:raffle/util/extension_methods.dart';
+import 'package:raffle/views/add_raffle/steps_widgets/raffle_date_step.dart';
 import 'package:raffle/views/add_raffle/steps_widgets/raffle_description_step.dart';
+import 'package:raffle/views/add_raffle/steps_widgets/raffle_price_step.dart';
+import 'package:raffle/views/add_raffle/steps_widgets/raffle_tickets_step.dart';
 import 'package:raffle/views/add_raffle/steps_widgets/raffle_tittle_step.dart';
 
 enum AddRaffleSteps { picture, title, description, price, tickets, date }
@@ -17,8 +20,9 @@ class AddRaffle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AddRaffleValidation addRaffleValidation =
-        Provider.of<AddRaffleValidation>(context);
+    // AddRaffleValidation addRaffleValidation =
+    //     Provider.of<AddRaffleValidation>(context);
+    AddRaffleValidation addRaffleValidation = context.watch<AddRaffleValidation>();
     AddRaffleModel addRaffleModel = context.watch<AddRaffleModel>();
     List<Step> steps = [
       Step(
@@ -40,17 +44,17 @@ class AddRaffle extends StatelessWidget {
       Step(
         isActive: addRaffleModel.index >= AddRaffleSteps.price.index,
         title: _getTittle(addRaffleModel, AddRaffleSteps.price),
-        content: Container(),
+        content: RafflePriceStep(addRaffleValidation: addRaffleValidation),
       ),
       Step(
         isActive: addRaffleModel.index >= AddRaffleSteps.tickets.index,
         title: _getTittle(addRaffleModel, AddRaffleSteps.tickets),
-        content: Container(),
+        content: RaffleTicketsStep(addRaffleValidation: addRaffleValidation,),
       ),
       Step(
         isActive: addRaffleModel.index >= AddRaffleSteps.date.index,
         title: _getTittle(addRaffleModel, AddRaffleSteps.date),
-        content: Container(),
+        content: RaffleDateStep(addRaffleValidation: addRaffleValidation),
       ),
     ];
 

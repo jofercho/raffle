@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:numberpicker/numberpicker.dart';
 import 'package:raffle/model/validation/add_raffle_validation.dart';
 import 'package:raffle/views/add_raffle/steps_widgets/raffle_step.dart';
 
-class RaffleDescriptionStep extends StatelessWidget {
+class RaffleDateStep extends StatelessWidget {
   final AddRaffleValidation addRaffleValidation;
 
-  const RaffleDescriptionStep({
+  const RaffleDateStep({
     Key? key,
     required this.addRaffleValidation,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return RaffleStep(customForm: DescriptionForm(addRaffleValidation: addRaffleValidation,));
+    return RaffleStep(
+        customForm: DescriptionForm(
+      addRaffleValidation: addRaffleValidation,
+    ));
   }
 }
 
@@ -26,21 +30,16 @@ class DescriptionForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      // initialValue: addRaffleValidation.title.value??'',
-
-      onChanged: (value){
-        addRaffleValidation.changeDescription(value);
-      },
-      keyboardType: TextInputType.multiline,
-      minLines: 2,
-      maxLines: 5,
-      decoration: const InputDecoration(
-        labelText: 'Description',
-        hintText: 'Describe the raffle',
-        icon: Icon(Icons.book),
-        isDense: true,
-      ),
-    );
+    DateTime selectDate = DateTime.now();
+    return Container(child: ElevatedButton(
+      child: Text('Pick a date'),
+      onPressed: (() {
+        showDatePicker(
+            context: context,
+            initialDate: selectDate,
+            firstDate: DateTime.now().add(Duration(hours: 1)),
+            lastDate: DateTime.now().add(Duration(days: 360)));
+      }),
+    ));
   }
 }
