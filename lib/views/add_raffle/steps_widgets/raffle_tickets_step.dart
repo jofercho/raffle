@@ -33,7 +33,7 @@ class DescriptionForm extends StatelessWidget {
     return NumberPicker(
         minValue: 0,
         maxValue: 100,
-        value: addRaffleValidation.tickets.value,
+        value: addRaffleValidation.tickets.value??0,
         onChanged: (value){
           addRaffleValidation.changeTickets(value);
           });

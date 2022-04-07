@@ -4,7 +4,7 @@ import 'package:raffle/views/add_raffle/steps_widgets/raffle_step.dart';
 
 class RafflePriceStep extends StatelessWidget {
   final AddRaffleValidation addRaffleValidation;
-  
+
   const RafflePriceStep({
     Key? key,
     required this.addRaffleValidation,
@@ -12,24 +12,9 @@ class RafflePriceStep extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaffleStep(customForm: PriceForm(addRaffleValidation: addRaffleValidation),);
-    // return Padding(
-    //   padding: const EdgeInsets.all(16),
-    //   child: Material(
-    //     elevation: 1,
-    //     clipBehavior: Clip.antiAlias,
-    //     borderRadius: BorderRadius.circular(8),
-    //     child: Column(
-    //       mainAxisSize: MainAxisSize.min,
-    //       children: <Widget>[
-    //         Padding(
-    //           padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-    //           child: PriceForm(addRaffleValidation: addRaffleValidation),
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
+    return RaffleStep(
+      customForm: PriceForm(addRaffleValidation: addRaffleValidation),
+    );
   }
 }
 
@@ -44,9 +29,13 @@ class PriceForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      initialValue: addRaffleValidation.price.value??'',
-      onChanged: (value){
-        addRaffleValidation.changeTitle(value);
+      initialValue: addRaffleValidation.price.value == null
+          ? ''
+          : addRaffleValidation.price.value.toString(),
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          addRaffleValidation.changePrice(double.parse(value));
+        }
       },
       keyboardType: TextInputType.number,
       decoration: const InputDecoration(

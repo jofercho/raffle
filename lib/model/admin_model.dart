@@ -12,10 +12,3 @@ class AdminModel extends UserModel {
     notifyListeners();
   }
 }
-
-class Test{
-  String test = '';
-  Test(){
-    test='esto es un test';
-  }
-}

@@ -35,7 +35,7 @@ class _MyChatState extends State<MyChat> {
   @override
   void initState() {
     super.initState();
-    fakeStart();
+    // fakeStart();
   }
 
   fakeStart() {
@@ -53,7 +53,7 @@ class _MyChatState extends State<MyChat> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<AdminModel>(create: (context) => admin),
+        ChangeNotifierProvider<AdminModel>(create: (context) => admin),//TODO review
         ChangeNotifierProvider<AuthenticationValidation>(
             create: (context) => auth),
         ChangeNotifierProvider<AddRaffleValidation>(
@@ -61,8 +61,8 @@ class _MyChatState extends State<MyChat> {
         ChangeNotifierProvider<RaffleTabsNavigationModel>(
             create: (context) => RaffleTabsNavigationModel()),
         ChangeNotifierProvider<AddRaffleModel>(
-            create: (context) => AddRaffleModel()),
-        ChangeNotifierProvider<UserService>(create: (context) => UserService())
+            create: (context) => AddRaffleModel()), //TODO refactory
+        ChangeNotifierProvider<UserService>(create: (context) => UserService())//TODO review
       ],
       child: MaterialApp(
         title: 'MyChat',

@@ -31,15 +31,22 @@ class DescriptionForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime selectDate = DateTime.now();
-    return Container(child: ElevatedButton(
-      child: Text('Pick a date'),
-      onPressed: (() {
-        showDatePicker(
+    return Column(
+      children: [
+        Text(addRaffleValidation.date.value.toString()),
+        ElevatedButton(
+          child: const Text('Pick a date'),
+          onPressed: (() async {
+        DateTime? dateTime = await showDatePicker(
+            //TODO prevent past dates
             context: context,
             initialDate: selectDate,
-            firstDate: DateTime.now().add(Duration(hours: 1)),
-            lastDate: DateTime.now().add(Duration(days: 360)));
-      }),
-    ));
+            firstDate: DateTime.now().add(const Duration(hours: 1)),
+            lastDate: DateTime.now().add(const Duration(days: 360)));
+        addRaffleValidation.changeDate(dateTime!);
+          }),
+        ),
+      ],
+    );
   }
 }

@@ -1,12 +1,10 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 
 class RaffleModel extends ChangeNotifier {
   final String title;
   final String description;
-  // final picture TODO: get picture from firebase storage
+  final String picture;
   final double price;
   final int tickets; //this could be an object with user info
   final DateTime dateTime;
@@ -17,6 +15,7 @@ class RaffleModel extends ChangeNotifier {
   RaffleModel(
       {required this.title,
       required this.description,
+      required this.picture,
       required this.price,
       required this.tickets,
       required this.dateTime,
@@ -26,6 +25,7 @@ class RaffleModel extends ChangeNotifier {
       : this(
           title: json['title']! as String,
           description: json['description']! as String,
+          picture: json['picture']! as String,
           price: json['price']! as double,
           tickets: json['tickets']! as int,
           dateTime: json['dateTime']! as DateTime,
@@ -36,6 +36,7 @@ class RaffleModel extends ChangeNotifier {
     return {
       'title': title,
       'description': description,
+      'picture': picture,
       'price': price,
       'tickets': tickets,
       'dateTime': dateTime,
