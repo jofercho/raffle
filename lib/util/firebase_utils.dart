@@ -31,8 +31,9 @@ class FirebaseUtils {
 
   _configureFireStore() {
     String host = Platform.isAndroid? '10.0.2.2' : 'localhost';
-    int port = 8080;
+    int port = 8081;
     FirebaseFirestore firestore = FirebaseFirestore.instance;
+    // firestore.useFirestoreEmulator(host, port);
     firestore.settings = Settings(
         persistenceEnabled: false, host: '$host:$port', sslEnabled: false);
   }

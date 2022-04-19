@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:raffle/common/theme.dart';
 import 'package:raffle/model/add_raffle/add_raffle_model.dart';
 import 'package:raffle/model/raflle_tabs_providers/raffle_tabs_model.dart';
@@ -18,6 +20,8 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseUtils firebaseUtils = FirebaseUtils();
   await firebaseUtils.initialize();
+  // FirebaseFirestore.instance.clearPersistence();
+  // FirebaseAuth.instance.signOut();
   runApp(const MyChat());
 }
 
@@ -66,7 +70,7 @@ class _MyChatState extends State<MyChat> {
       ],
       child: MaterialApp(
         title: 'MyChat',
-        theme: appTheme,
+        theme: getAppTheme(context),
         // home: Authenticate(),
         initialRoute: Navigation.authenticate,
         routes: {

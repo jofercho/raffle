@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-final appTheme = ThemeData(
+getAppTheme(BuildContext context){
+  return ThemeData(
     primarySwatch: Colors.yellow,
-    textTheme: const TextTheme(
-      headline1: TextStyle(
-        fontFamily: 'Corben',
-        fontWeight: FontWeight.w700,
-        fontSize: 24,
-        color: Colors.black,
-      ),
-    ));
+    textTheme: GoogleFonts.montserratTextTheme(Theme.of(context).textTheme)
+  );
+}
 
 final inputBoxDecoration = BoxDecoration(
   color: Colors.white,
